@@ -1,12 +1,25 @@
 $(document).ready(function(){
-  count = 0;
+  count = null;
+  myCount = null;
   $("#set").click(function(){
-    count_end = $("#number_set").val();
-    myCount = setInterval(function(){myTimer()},1000);
+    if ( $("#number_set").val() != "") {
+      count_end = $("#number_set").val();
+      clearInterval(myCount);
+      myCount = setInterval(function(){myTimer()},1000);
+    }
   });
   function myTimer(){
-	  count = count + 1;
-	  document.getElementById("count_show").innerHTML=count;
+    count = count + 1;
+    if (count_end == null) {
+      clearInterval(myCount);
+      return;
+    }
+    if (count >= count_end){
+      clearInterval(myCount);
+      document.getElementById("count_show").innerHTML=count;
+      return;
+    }
+    document.getElementById("count_show").innerHTML=count;
     if (count % 3 == 0) {
       $(".fingers").addClass("highlight");
     }
@@ -19,15 +32,12 @@ $(document).ready(function(){
     if (count % 5 != 0) {
       $(".toes").removeClass("highlight");
     }
-
-    if (count >= count_end){
-      clearInterval(myCount);
-    }
   }
 
   $("#reset").click(function(){
     document.getElementById("number_set").value = "";
     count = null;
+    count_end = null;
     document.getElementById("count_show").innerHTML=count;
     clearInterval(myCount);
     $(".fingers").removeClass("highlight");
