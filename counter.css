@@ -1,0 +1,13 @@
+.highlight {
+	background-color: yellow;
+}
+.fingers{
+  text-align: center;
+  border: solid blue;
+  border-width: thin;
+}
+.toes{
+  text-align: center;
+  border: solid blue;
+  border-width: thin;
+}
